@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电影天堂-在线免费观看_高清电影电视剧资源推荐_热门影视大全</title>
+  <meta name="description" content="电影天堂提供在线免费观看的高清电影、电视剧、综艺与动漫资源，涵盖热门院线大片、经典老片和最新剧集。页面整理影视分类、热播榜单、深度解析与用户推荐，帮助您快速找到想看的影片。">
+  <meta name="keywords" content="电影天堂,在线免费观看,高清电影,电视剧大全,影视资源推荐">
+  <style>
+    /* 全局变量与基础 */
+    :root {
+      --bg: #0d0f14;
+      --surface: #171a21;
+      --surface-soft: #1f232c;
+      --border: #2a2f3a;
+      --text: #e8edf5;
+      --text-muted: #9aa4b5;
+      --accent: #4f9fff;
+      --accent-soft: #1f3a5f;
+      --gold: #d4af37;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 12px 30px rgba(0,0,0,0.6);
+      --max-width: 1200px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* 通用卡片 */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 6px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 6px;
+    }
+
+    /* 导航 */
+    .nav-bar {
+      background: rgba(13, 15, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 20%, #6ea8ff 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Banner */
+    .hero {
+      padding: 48px 0 32px;
+      background: radial-gradient(circle at 20% 0%, #1a2740 0%, transparent 60%);
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      max-width: 800px;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin-bottom: 28px;
+    }
+
+    .search-box {
+      display: flex;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 60px;
+      padding: 6px 6px 6px 24px;
+      max-width: 540px;
+      margin-bottom: 28px;
+      align-items: center;
+    }
+
+    .search-box input {
+      background: transparent;
+      border: none;
+      flex: 1;
+      padding: 12px 0;
+      color: var(--text);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-box input::placeholder {
+      color: #5f6b7e;
+    }
+
+    .search-box button {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 28px;
+      border-radius: 60px;
+      cursor: default;
+      font-size: 0.95rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .hero-tags a {
+      background: var(--surface-soft);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+
+    .hero-tags a:hover {
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    /* 内容简介 */
+    .intro-section {
+      padding: 40px 0;
+    }
+
+    .intro-text {
+      max-width: 900px;
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      line-height: 1.8;
+    }
+
+    .intro-text strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* 卡片网格 */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .movie-card {
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .movie-card .cover {
+      height: 140px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(145deg, #1f2a3a, #10141c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3a4b63;
+      margin-bottom: 6px;
+      border: 1px solid #2a3340;
+    }
+
+    .movie-card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .movie-card .meta {
+      font-size: 0.8rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .movie-card .desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .movie-card .bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.78rem;
+      color: #6b7a8f;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+    }
+
+    /* 最新更新列表 */
+    .update-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .update-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      padding: 16px 20px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+    }
+
+    .update-item .name {
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .update-item .time {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: var(--surface-soft);
+      padding: 4px 12px;
+      border-radius: 30px;
+    }
+
+    /* 分类入口 */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 14px;
+    }
+
+    .cat-item {
+      background: var(--surface-soft);
+      padding: 14px 10px;
+      text-align: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: all 0.15s;
+    }
+
+    .cat-item:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    /* 深度解析 */
+    .deep-dive {
+      background: var(--surface);
+      padding: 32px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      line-height: 1.85;
+      font-size: 1.02rem;
+      color: #cbd5e1;
+    }
+
+    .deep-dive p {
+      margin-bottom: 18px;
+    }
+
+    /* FAQ */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .faq-item {
+      background: var(--surface);
+      padding: 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .faq-item h4 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: #fff;
+    }
+
+    .faq-item p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* 评论 */
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      max-width: 900px;
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 16px;
+      background: var(--surface);
+      padding: 18px 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      background: var(--accent-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .comment-content .user {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+
+    .comment-content .date {
+      font-size: 0.78rem;
+      color: #6b7a8f;
+      margin-left: 10px;
+      font-weight: 400;
+    }
+
+    .comment-content p {
+      font-size: 0.92rem;
+      color: #b0bccd;
+    }
+
+    /* 资讯 */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 22px;
+    }
+
+    .news-card {
+      background: var(--surface);
+      padding: 22px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .news-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .news-card .date {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .news-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+    }
+
+    /* 页脚 */
+    footer {
+      margin-top: 60px;
+      padding: 40px 0 30px;
+      border-top: 1px solid var(--border);
+      color: #6f7a8b;
+      font-size: 0.85rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .nav-links { gap: 16px; font-size: 0.85rem; }
+      .section-title { font-size: 1.5rem; }
+      .search-box { flex-direction: column; padding: 16px; border-radius: 20px; }
+      .search-box button { width: 100%; margin-top: 10px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 16px; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+
+    /* 各 section 间距 */
+    section {
+      margin-bottom: 56px;
+    }
+
+    /* 锚点偏移 */
+    [id] {
+      scroll-margin-top: 90px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 导航 -->
+  <header class="nav-bar">
+    <div class="container nav-inner">
+      <div class="logo">🎬 电影天堂</div>
+      <nav class="nav-links">
+        <a href="/#hot">热门推荐</a>
+        <a href="/#latest">最新更新</a>
+        <a href="/#categories">分类浏览</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">用户评论</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 首屏 Banner -->
+  <section class="hero container" id="home">
+    <h1>电影天堂 · <span>在线免费观看</span> 高清影视资源合集</h1>
+    <p class="hero-sub">
+      聚合院线大片、热门剧集、经典老片与高分纪录片，实时更新播放源与推荐榜单。<br>
+      无需注册，极速浏览，找到你想看的下一部好片。
+    </p>
+    <div class="search-box">
+      <input type="text" placeholder="搜索电影、剧集、演员或导演..." aria-label="搜索影片">
+      <button type="button">搜索</button>
+    </div>
+    <div class="hero-tags">
+      <a href="/#hot">🔥 本周热播</a>
+      <a href="/#latest">🆕 最新上线</a>
+      <a href="/#categories">🎭 类型片库</a>
+      <a href="/#deep">📖 深度解析</a>
+      <a href="/#faq">❓ 观看指南</a>
+      <a href="/#comments">💬 影迷讨论</a>
+      <a href="/#news">📰 影视资讯</a>
+    </div>
+  </section>
+
+  <!-- 内容简介 -->
+  <section class="intro-section container">
+    <div class="intro-text">
+      <p><strong>电影天堂 在线免费观看</strong> 是影迷日常找片的核心诉求：片源要全、更新要快、画质要稳、分类要准。本页面围绕这一场景，整理了近期热门的院线电影、高分剧集、经典回顾以及口碑综艺，并提供清晰的分类导航与播放指引。无论你是想追新番、补老片，还是寻找适合周末放松的下饭剧，都能在这里快速定位到感兴趣的内容。</p>
+      <p>页面不仅罗列片单，还包含编辑视角的深度解析、常见问题答疑以及真实影迷评论，帮助你在选择影片时获得更多参考维度。如果你习惯在手机端浏览，页面同样做了移动端适配，卡片和列表在窄屏下依然清晰易读。收藏本页即可随时查看最新上架与热门榜单，减少在多个平台间反复搜索的时间成本。</p>
+    </div>
+  </section>
+
+  <!-- 热门推荐 -->
+  <section class="container" id="hot">
+    <h2 class="section-title">热门推荐 · 本周高热度影片</h2>
+    <div class="grid-4">
+      <article class="movie-card">
+        <div class="cover">🎥</div>
+        <h3>星际迷途</h3>
+        <div class="meta">科幻 / 冒险 · 2026</div>
+        <p class="desc">深空探索题材，视觉奇观与哲学思辨并行，结尾反转引发大量讨论。</p>
+        <div class="bottom"><span>热度 9.8w</span><span>已上线</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">🎭</div>
+        <h3>暗夜回声</h3>
+        <div class="meta">悬疑 / 犯罪 · 2026</div>
+        <p class="desc">连环案嵌套叙事，双线时间轴剪辑凌厉，适合喜欢烧脑推理的观众。</p>
+        <div class="bottom"><span>热度 8.9w</span><span>HD中字</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">🏯</div>
+        <h3>长安十二时辰·续</h3>
+        <div class="meta">古装 / 历史 · 2026</div>
+        <p class="desc">原班人马回归，服化道再度升级，权谋与动作戏份比重增加。</p>
+        <div class="bottom"><span>热度 12.1w</span><span>更新至18集</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">💔</div>
+        <h3>如果雨之后</h3>
+        <div class="meta">爱情 / 剧情 · 2026</div>
+        <p class="desc">文艺向爱情小品，摄影和配乐突出，适合一个人安静观看。</p>
+        <div class="bottom"><span>热度 6.2w</span><span>抢先版</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">🦸</div>
+        <h3>超能纪元</h3>
+        <div class="meta">动作 / 科幻 · 2026</div>
+        <p class="desc">超级英雄团队新作，特效场面密集，粉丝向彩蛋丰富。</p>
+        <div class="bottom"><span>热度 11.5w</span><span>4K HDR</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">🐉</div>
+        <h3>龙裔：觉醒</h3>
+        <div class="meta">奇幻 / 动画 · 2026</div>
+        <p class="desc">国产动画电影黑马，手绘风格与东方龙元素结合，适合全家观看。</p>
+        <div class="bottom"><span>热度 7.7w</span><span>高分推荐</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">🕵️</div>
+        <h3>沉默的证人</h3>
+        <div class="meta">悬疑 / 律政 · 2026</div>
+        <p class="desc">法庭辩论与罪案调查交织，剧本扎实，配角表现亮眼。</p>
+        <div class="bottom"><span>热度 8.1w</span><span>全20集</span></div>
+      </article>
+      <article class="movie-card">
+        <div class="cover">🏔️</div>
+        <h3>极地孤旅</h3>
+        <div class="meta">纪录片 / 自然 · 2026</div>
+        <p class="desc">北极圈生态纪录，画面壮美，旁白克制，适合喜欢自然题材的观众。</p>
+        <div class="bottom"><span>热度 5.4w</span><span>蓝光</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 最新更新 -->
+  <section class="container" id="latest">
+    <h2 class="section-title">最新更新 · 今日上架与更新提醒</h2>
+    <div class="update-list">
+      <div class="update-item"><span class="name">🎬 星际迷途 <span class="tag">科幻</span></span><span class="time">2026-11-07 更新4K</span></div>
+      <div class="update-item"><span class="name">📺 沉默的证人 <span class="tag">悬疑</span></span><span class="time">2026-11-07 第18集</span></div>
+      <div class="update-item"><span class="name">🎭 暗夜回声 <span class="tag">犯罪</span></span><span class="time">2026-11-06 高清版</span></div>
+      <div class="update-item"><span class="name">🏯 长安十二时辰·续 <span class="tag">古装</span></span><span class="time">2026-11-06 第17集</span></div>
+      <div class="update-item"><span class="name">🦸 超能纪元 <span class="tag">动作</span></span><span class="time">2026-11-05 杜比视界</span></div>
+      <div class="update-item"><span class="name">💔 如果雨之后 <span class="tag">爱情</span></span><span class="time">2026-11-05 TC尝鲜</span></div>
+      <div class="update-item"><span class="name">🐉 龙裔：觉醒 <span class="tag">动画</span></span><span class="time">2026-11-04 国配版</span></div>
+      <div class="update-item"><span class="name">🕵️ 迷雾追踪 <span class="tag">剧集</span></span><span class="time">2026-11-04 第6集</span></div>
+    </div>
+  </section>
+
+  <!-- 分类入口 -->
+  <section class="container" id="categories">
+    <h2 class="section-title">分类浏览 · 按类型快速找片</h2>
+    <div class="category-grid">
+      <a href="/#hot" class="cat-item">全部影片</a>
+      <a href="/#hot" class="cat-item">动作冒险</a>
+      <a href="/#hot" class="cat-item">悬疑犯罪</a>
+      <a href="/#hot" class="cat-item">科幻奇幻</a>
+      <a href="/#hot" class="cat-item">爱情剧情</a>
+      <a href="/#hot" class="cat-item">古装历史</a>
+      <a href="/#hot" class="cat-item">动画家庭</a>
+      <a href="/#hot" class="cat-item">纪录片</a>
+    </div>
+  </section>
+
+  <!-- 深度解析正文 -->
+  <section class="container" id="deep">
+    <h2 class="section-title">深度解析 · 电影天堂选片指南</h2>
+    <div class="deep-dive">
+      <p>在<strong>电影天堂 在线免费观看</strong>这个需求背后，观众通常希望用最短的时间找到质量可靠、播放流畅的影片。影视资源站的核心价值并不只是“片多”，而是能否通过清晰的分类、有效的标签和真实的评价体系，帮助用户降低选择成本。本页面在结构设计上优先展示热门推荐与最新更新，正是为了满足“先看当下流行什么”的浏览习惯。</p>
+      <p>从类型维度来看，动作、悬疑和科幻始终是线上点播的高频分类。动作片追求即时视觉反馈，适合碎片时间观看；悬疑片依赖叙事密度，观众更倾向于一次性刷完；科幻题材则对画质和特效有更高要求，因此推荐时我们会标注清晰度版本。古装与爱情类内容在周末和节假日流量明显上升，这类影片通常附带较强的社交讨论属性，评论区互动也更活跃。</p>
+      <p>在内容筛选上，编辑视角主要关注三个层面：第一是影片本身的可看性，包括剧本完整度、表演水准和制作完成度；第二是播放版本的稳定性，例如是否提供高清中字、是否有完整片尾；第三是更新时效，对于连载剧集而言，能否同步跟进最新集数直接影响用户体验。本页面的“最新更新”模块会定期整理近期上架与剧集进度，方便追更用户快速核对。</p>
+      <p>针对不同人群，选片策略也有所不同。如果是家庭观影，动画与合家欢题材更合适；情侣或朋友聚会可以优先考虑喜剧和轻爱情片；独自观看时，悬疑、纪录片或作者风格强烈的剧情片往往能带来更沉浸的体验。页面中的标签和卡片描述尽量覆盖这些决策因素，而不是只堆砌片名。</p>
+      <p>另外，很多用户搜索“电影天堂”时，真正想找的是“能直接在线观看且不用折腾的入口”。因此本页面在信息组织上强调可达性：分类入口明显、推荐卡片带有状态标注、常见问题中说明观看注意事项。我们希望这个页面成为影迷日常找片的起点，而不是一次性的搜索结果页。</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="container" id="faq">
+    <h2 class="section-title">常见问题 · 观影答疑</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>电影天堂在线免费观看需要注册吗？</h4>
+        <p>本页面仅提供影视信息聚合与推荐指引，不强制注册。您可以根据页面中的分类和推荐卡片自行选择感兴趣的内容，并前往对应播放渠道观看。建议优先选择标注高清或蓝光版本的条目，以获得更好体验。</p>
+      </div>
+      <div class="faq-item">
+        <h4>为什么有些影片只有预告片？</h4>
+        <p>影视资源的上线时间受版权和发行窗口影响。部分院线新片在映期间仅提供预告或花絮，正片通常会在下映后一段时间才上线。您可以关注“最新更新”模块，或通过分类浏览查看已上线完整版的影片。</p>
+      </div>
+      <div class="faq-item">
+        <h4>页面推荐的影片适合哪些人看？</h4>
+        <p>推荐卡片会标注类型和简短看点。动作与科幻适合追求视听刺激的观众，悬疑犯罪适合喜欢推理和反转的影迷，爱情与剧情片更适合安静观影场景。您可以根据卡片上的标签和热度信息快速判断是否符合个人口味。</p>
+      </div>
+      <div class="faq-item">
+        <h4>如何第一时间知道剧集更新？</h4>
+        <p>“最新更新”列表会集中展示近期上架和剧集进度，您可以在每次访问时优先查看该区域。此外，热门推荐中的连载剧集也会标注当前集数，方便判断是否值得开始追更。</p>
+      </div>
+      <div class="faq-item">
+        <h4>电影天堂页面上的评分和热度真实吗？</h4>
+        <p>页面中的热度与评分是基于站内浏览行为和用户互动生成的参考指标，主要用于横向比较影片关注度，并非专业影评分数。建议结合影片简介、类型标签以及评论区反馈综合判断。</p>
+      </div>
+      <div class="faq-item">
+        <h4>有没有类似电影天堂的选片方法？</h4>
+        <p>可以按照“类型→热度→版本→评论”的顺序筛选：先确定想看的类型，再从热门列表中挑选关注度较高的影片，接着确认是否有高清版本，最后浏览评论区了解实际观看反馈。本页面的分类和榜单模块就是按照这个逻辑组织的。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 用户评论 -->
+  <section class="container" id="comments">
+    <h2 class="section-title">影迷评论 · 真实讨论精选</h2>
+    <div class="comment-list">
+      <div class="comment-item">
+        <div class="avatar">星</div>
+        <div class="comment-content">
+          <div class="user">星际旅人 <span class="date">2026-11-06</span></div>
+          <p>星际迷途的视觉效果确实在线，尤其是穿越星云那段，用大屏看很震撼。剧情稍微有点慢热，撑过前半小时就好了。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">夜</div>
+        <div class="comment-content">
+          <div class="user">夜行观察者 <span class="date">2026-11-05</span></div>
+          <p>暗夜回声的剪辑太碎了，前两集看得有点累，但坚持到第四集开始上头。喜欢双线叙事的可以试试。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">长</div>
+        <div class="comment-content">
+          <div class="user">长安旧梦 <span class="date">2026-11-04</span></div>
+          <p>续集服化道比第一部还精致，但节奏明显慢了一些。希望后面权谋线能拉起来，目前还是靠情怀在追。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">超</div>
+        <div class="comment-content">
+          <div class="user">超英粉 <span class="date">2026-11-03</span></div>
+          <p>超能纪元的特效值回票价，但文戏确实一般。彩蛋很多，粉丝会看得很开心，路人可能会觉得有点乱。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">雨</div>
+        <div class="comment-content">
+          <div class="user">雨天听歌 <span class="date">2026-11-02</span></div>
+          <p>如果雨之后很适合一个人晚上看，摄影和配乐都很舒服，故事简单但情绪到位。推荐给喜欢文艺片的朋友。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">龙</div>
+        <div class="comment-content">
+          <div class="user">龙崽崽 <span class="date">2026-11-01</span></div>
+          <p>龙裔觉醒是带小孩去看的，结果我自己也看进去了。手绘风格很特别，东方龙的设计很有想象力。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">法</div>
+        <div class="comment-content">
+          <div class="user">法理人生 <span class="date">2026-10-30</span></div>
+          <p>沉默的证人剧本挺扎实，法庭戏有来有回。配角比主角出彩，希望第二季能多给配角一些空间。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">极</div>
+        <div class="comment-content">
+          <div class="user">极地行者 <span class="date">2026-10-29</span></div>
+          <p>极地孤旅的镜头太美了，每一帧都能截图当壁纸。旁白不煽情，这点很难得。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">追</div>
+        <div class="comment-content">
+          <div class="user">追剧不熬夜 <span class="date">2026-10-28</span></div>
+          <p>这个页面整理得挺清楚的，分类和更新列表一目了然。希望以后能加上按年份筛选的功能。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">迷</div>
+        <div class="comment-content">
+          <div class="user">迷雾侦探 <span class="date">2026-10-27</span></div>
+          <p>迷雾追踪第六集结尾那个反转没想到，编剧有点东西。不过前几集铺垫确实有点长。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">路</div>
+        <div class="comment-content">
+          <div class="user">路人甲 <span class="date">2026-10-25</span></div>
+          <p>有些影片只有预告，有点可惜。不过热门推荐里能看的还是挺多的，先收藏了。</p>
+        </div>
+      </div>
+      <div class="comment-item">
+        <div class="avatar">小</div>
+        <div class="comment-content">
+          <div class="user">小满 <span class="date">2026-10-24</span></div>
+          <p>评论区氛围不错，没有太多剧透，适合看完再来交流。希望多推荐一些冷门佳片。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 相关资讯 -->
+  <section class="container" id="news">
+    <h2 class="section-title">影视资讯 · 近期动态速览</h2>
+    <div class="news-grid">
+      <div class="news-card">
+        <h4>星际迷途导演确认续集正在筹备</h4>
+        <div class="date">2026-11-06</div>
+        <p>据外媒报道，科幻片星际迷途全球票房突破预期，导演在采访中透露续集剧本已进入早期阶段。</p>
+      </div>
+      <div class="news-card">
+        <h4>长安十二时辰·续 豆瓣开分 8.3</h4>
+        <div class="date">2026-11-05</div>
+        <p>续集开播首周口碑稳定，服化道和摄影获得普遍好评，观众对后续权谋线期待值较高。</p>
+      </div>
+      <div class="news-card">
+        <h4>暗夜回声确认引进内地流媒体</h4>
+        <div class="date">2026-11-04</div>
+        <p>悬疑犯罪片暗夜回声已确定上线国内平台，具体档期尚未公布，预计将提供高清中字版本。</p>
+      </div>
+      <div class="news-card">
+        <h4>龙裔：觉醒 密钥延期至12月</h4>
+        <div class="date">2026-11-03</div>
+        <p>国产动画电影龙裔觉醒宣布密钥延期，票房后劲十足，片方同步释出幕后手绘特辑。</p>
+      </div>
+      <div class="news-card">
+        <h4>极地孤旅 获自然纪录片推荐奖</h4>
+        <div class="date">2026-11-02</div>
+        <p>极地孤旅在近期纪录片评选中获得推荐，评委会称赞其克制的叙事与震撼的极地影像。</p>
+      </div>
+      <div class="news-card">
+        <h4>沉默的证人 第二季进入剧本阶段</h4>
+        <div class="date">2026-10-31</div>
+        <p>律政悬疑剧沉默的证人主创透露第二季正在开发中，将延续单元案件与主线交织的结构。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer>
+    <div class="container footer-inner">
+      <div>
+        <div style="font-weight:700; color:#e8edf5; margin-bottom:6px;">电影天堂</div>
+        <p style="max-width:360px;">影视信息聚合与推荐页面，内容整理仅供影迷参考。</p>
+      </div>
+      <div class="footer-links">
+        <a href="/#hot">热门推荐</a>
+        <a href="/#latest">最新更新</a>
+        <a href="/#categories">分类浏览</a>
+        <a href="/#deep">深度解析</a>
+        <a href="/#faq">常见问题</a>
+        <a href="/#comments">用户评论</a>
+      </div>
+    </div>
+    <div class="container" style="margin-top:24px; font-size:0.78rem; color:#4d5866;">
+      <p>© 2026 电影天堂 · 在线免费观看影视指南. 本站不存储任何视频内容，页面信息仅用于浏览与推荐参考。友情链接：影迷社区 | 独立影评 | 影视快讯</p>
+    </div>
+  </footer>
+
+  <!-- 固定脚本 -->
+  <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</body>
+        </html>
